@@ -4,7 +4,8 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   entry: {
-    app: "./benchmark/index.js"
+    app: "./tutorial/index.js"
+    // app: "./benchmark/index.js"
   },
   mode: "development",
   output: {
