@@ -61,11 +61,11 @@ function searchBlurry(root, keyword) {
     }
     if (keywordArr.length - 1 === i) {
       // 优化方案：
-      result = [...tempRoot.ids, ...tempRoot.childrenIds];
-      // result = [
-      //   ...tempRoot.ids,
-      //   ...collectChildrenInsideIds(tempRoot.children)
-      // ];
+      // result = [...tempRoot.ids, ...tempRoot.childrenIds];
+      result = [
+        ...tempRoot.ids,
+        ...collectChildrenInsideIds(tempRoot.children)
+      ];
     }
   }
   return distinct(result).map(id => {
@@ -123,7 +123,7 @@ fetch("https://randomuser.me/api/?results=5000&inc=gender,email,phone,cell,nat")
     });
 
     // 优化方案
-    decorateWithChildrenIds(root);
+    // decorateWithChildrenIds(root);
 
     console.log("---------- Data Ready: ----------");
     console.log(userMap);
@@ -146,4 +146,29 @@ fetch("https://randomuser.me/api/?results=5000&inc=gender,email,phone,cell,nat")
       }
     });
     console.log(regularSearchResults, `cost ${+new Date() - startTime2}ms`);
+
+    // if (regularSearchResults.length !== searchResults.length) {
+    //   const diff = [];
+    //   regularSearchResults.forEach(regularItem => {
+    //     if (!searchResults.find(item => item.email === regularItem.email)) {
+    //       diff.push(regularItem);
+    //     }
+    //   });
+    //   console.log("Any diff items:", diff);
+
+    //   function distinctUser(data) {
+    //     console.log("----------");
+    //     const temp = [];
+    //     data.forEach((dataItem, dataIndex) => {
+    //       if (temp.find(tempItem => tempItem.email === dataItem.email)) {
+    //         console.log(dataItem, dataIndex);
+    //       } else {
+    //         temp.push(dataItem);
+    //       }
+    //     });
+    //   }
+
+    //   distinctUser(searchResults);
+    //   distinctUser(regularSearchResults);
+    // }
   });
